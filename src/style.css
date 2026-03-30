@@ -1,0 +1,286 @@
+.eb-controls,
+.eb-titlebar {
+  --eb-font: "SF Pro Text", "Segoe UI Variable Display", "Segoe UI", Ubuntu,
+    Cantarell, sans-serif;
+  --eb-focus-ring: rgba(44, 123, 229, 0.34);
+  font-family: var(--eb-font);
+}
+
+.eb-controls {
+  display: inline-flex;
+  align-items: stretch;
+  vertical-align: top;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-app-region: no-drag;
+}
+
+.eb-controls * {
+  box-sizing: border-box;
+}
+
+.eb-controls__button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  appearance: none;
+  cursor: default;
+  outline: none;
+  -webkit-app-region: no-drag;
+}
+
+.eb-controls__button:focus-visible {
+  box-shadow: inset 0 0 0 2px var(--eb-focus-ring);
+}
+
+.eb-controls__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.eb-controls__icon svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.eb-controls__icon path,
+.eb-controls__icon circle {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.1;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.eb-controls[data-variant="windows"] {
+  min-height: 32px;
+  color: rgba(20, 20, 20, 0.88);
+}
+
+.eb-controls[data-theme="dark"][data-variant="windows"] {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+@media (prefers-color-scheme: dark) {
+  .eb-controls[data-theme="system"][data-variant="windows"] {
+    color: rgba(255, 255, 255, 0.9);
+  }
+}
+
+.eb-controls[data-variant="windows"] .eb-controls__button {
+  width: 46px;
+  height: 32px;
+  border-radius: 0;
+}
+
+.eb-controls[data-variant="windows"] .eb-controls__button--minimize:hover,
+.eb-controls[data-variant="windows"] .eb-controls__button--maximize:hover {
+  background: rgba(0, 0, 0, 0.055);
+}
+
+.eb-controls[data-theme="dark"][data-variant="windows"]
+  .eb-controls__button--minimize:hover,
+.eb-controls[data-theme="dark"][data-variant="windows"]
+  .eb-controls__button--maximize:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+@media (prefers-color-scheme: dark) {
+  .eb-controls[data-theme="system"][data-variant="windows"]
+    .eb-controls__button--minimize:hover,
+  .eb-controls[data-theme="system"][data-variant="windows"]
+    .eb-controls__button--maximize:hover {
+    background: rgba(255, 255, 255, 0.08);
+  }
+}
+
+.eb-controls[data-variant="windows"] .eb-controls__button--minimize:active,
+.eb-controls[data-variant="windows"] .eb-controls__button--maximize:active {
+  background: rgba(0, 0, 0, 0.095);
+}
+
+.eb-controls[data-theme="dark"][data-variant="windows"]
+  .eb-controls__button--minimize:active,
+.eb-controls[data-theme="dark"][data-variant="windows"]
+  .eb-controls__button--maximize:active {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+@media (prefers-color-scheme: dark) {
+  .eb-controls[data-theme="system"][data-variant="windows"]
+    .eb-controls__button--minimize:active,
+  .eb-controls[data-theme="system"][data-variant="windows"]
+    .eb-controls__button--maximize:active {
+    background: rgba(255, 255, 255, 0.12);
+  }
+}
+
+.eb-controls[data-variant="windows"] .eb-controls__button--close:hover {
+  background: #c42b1c;
+  color: #fff;
+}
+
+.eb-controls[data-variant="windows"] .eb-controls__button--close:active {
+  background: #a82618;
+  color: #fff;
+}
+
+.eb-controls[data-variant="windows"] .eb-controls__icon {
+  width: 10px;
+  height: 10px;
+}
+
+.eb-controls[data-variant="macos"] {
+  gap: 8px;
+  padding: 0 12px;
+}
+
+.eb-controls[data-variant="macos"] .eb-controls__button {
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  border: 0.5px solid rgba(0, 0, 0, 0.16);
+}
+
+.eb-controls[data-focused="false"][data-variant="macos"] .eb-controls__button {
+  border-color: rgba(0, 0, 0, 0.08);
+}
+
+.eb-controls[data-variant="macos"] .eb-controls__button--close {
+  background: linear-gradient(#ff6058, #ff544d);
+}
+
+.eb-controls[data-variant="macos"] .eb-controls__button--minimize {
+  background: linear-gradient(#ffbd44, #ffbd2e);
+}
+
+.eb-controls[data-variant="macos"] .eb-controls__button--maximize {
+  background: linear-gradient(#00ca4e, #28c840);
+}
+
+.eb-controls[data-focused="false"][data-variant="macos"]
+  .eb-controls__button--close,
+.eb-controls[data-focused="false"][data-variant="macos"]
+  .eb-controls__button--minimize,
+.eb-controls[data-focused="false"][data-variant="macos"]
+  .eb-controls__button--maximize {
+  background: linear-gradient(#d7d7d7, #cfcfcf);
+}
+
+.eb-controls[data-variant="macos"] .eb-controls__icon {
+  width: 6px;
+  height: 6px;
+  color: rgba(0, 0, 0, 0.72);
+  opacity: 0;
+  transform: scale(0.92);
+  transition: opacity 120ms ease, transform 120ms ease;
+}
+
+.eb-controls[data-variant="macos"]:hover .eb-controls__icon {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.eb-controls[data-variant="ubuntu"] {
+  gap: 10px;
+  padding-right: 10px;
+  color: #3c3c3c;
+}
+
+.eb-controls[data-theme="dark"][data-variant="ubuntu"] {
+  color: #f6f6f6;
+}
+
+@media (prefers-color-scheme: dark) {
+  .eb-controls[data-theme="system"][data-variant="ubuntu"] {
+    color: #f6f6f6;
+  }
+}
+
+.eb-controls[data-variant="ubuntu"] .eb-controls__button {
+  width: 24px;
+  height: 24px;
+  border-radius: 999px;
+  background: #dddddd;
+}
+
+.eb-controls[data-theme="dark"][data-variant="ubuntu"] .eb-controls__button {
+  background: #3a3a3a;
+}
+
+@media (prefers-color-scheme: dark) {
+  .eb-controls[data-theme="system"][data-variant="ubuntu"] .eb-controls__button {
+    background: #3a3a3a;
+  }
+}
+
+.eb-controls[data-variant="ubuntu"] .eb-controls__button:hover {
+  background: #cfcfcf;
+}
+
+.eb-controls[data-theme="dark"][data-variant="ubuntu"] .eb-controls__button:hover {
+  background: #474747;
+}
+
+@media (prefers-color-scheme: dark) {
+  .eb-controls[data-theme="system"][data-variant="ubuntu"]
+    .eb-controls__button:hover {
+    background: #474747;
+  }
+}
+
+.eb-controls[data-variant="ubuntu"] .eb-controls__button:active {
+  background: #bababa;
+}
+
+.eb-controls[data-theme="dark"][data-variant="ubuntu"] .eb-controls__button:active {
+  background: #555555;
+}
+
+@media (prefers-color-scheme: dark) {
+  .eb-controls[data-theme="system"][data-variant="ubuntu"]
+    .eb-controls__button:active {
+    background: #555555;
+  }
+}
+
+.eb-controls[data-variant="ubuntu"] .eb-controls__icon {
+  width: 10px;
+  height: 10px;
+}
+
+.eb-titlebar {
+  display: flex;
+  align-items: center;
+  min-height: 38px;
+  gap: 12px;
+  padding-inline: 8px;
+  overflow: hidden;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-app-region: drag;
+}
+
+.eb-titlebar[data-theme="system"] {
+  color-scheme: light dark;
+}
+
+.eb-titlebar__content {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>electrobun-controls playground</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+        font-family: Inter, system-ui, sans-serif;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        background:
+          radial-gradient(circle at top, rgba(255, 173, 66, 0.18), transparent 32%),
+          linear-gradient(180deg, #f6f7fb, #e8ebf2 58%, #dfe4ec);
+        color: #0f172a;
+      }
+
+      body[data-theme="dark"] {
+        background:
+          radial-gradient(circle at top, rgba(255, 173, 66, 0.12), transparent 28%),
+          linear-gradient(180deg, #111827, #0f172a 58%, #0b1220);
+        color: #f8fafc;
+      }
+
+      .app {
+        max-width: 980px;
+        margin: 0 auto;
+        padding: 48px 20px 64px;
+      }
+
+      .panel {
+        border: 1px solid rgba(15, 23, 42, 0.08);
+        border-radius: 20px;
+        overflow: hidden;
+        background: rgba(255, 255, 255, 0.74);
+        backdrop-filter: blur(14px);
+        box-shadow: 0 24px 60px rgba(15, 23, 42, 0.16);
+      }
+
+      body[data-theme="dark"] .panel {
+        border-color: rgba(255, 255, 255, 0.08);
+        background: rgba(15, 23, 42, 0.68);
+      }
+
+      .panel-body {
+        padding: 24px;
+        display: grid;
+        gap: 20px;
+      }
+
+      .toolbar {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin-bottom: 20px;
+      }
+
+      select {
+        padding: 10px 12px;
+        border-radius: 10px;
+        border: 1px solid rgba(15, 23, 42, 0.1);
+        background: rgba(255, 255, 255, 0.9);
+      }
+
+      body[data-theme="dark"] select {
+        background: rgba(15, 23, 42, 0.9);
+        color: inherit;
+        border-color: rgba(255, 255, 255, 0.08);
+      }
+
+      .meta {
+        font-size: 14px;
+        opacity: 0.7;
+      }
+    </style>
+  </head>
+  <body data-theme="light">
+    <div class="app">
+      <div class="toolbar">
+        <label>
+          Platform
+          <select id="platform">
+            <option value="macos">macOS</option>
+            <option value="windows">Windows</option>
+            <option value="linux">Ubuntu/Linux</option>
+          </select>
+        </label>
+        <label>
+          Theme
+          <select id="theme">
+            <option value="light">Light</option>
+            <option value="dark">Dark</option>
+            <option value="system">System</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="panel">
+        <div id="titlebar"></div>
+        <div class="panel-body">
+          <div class="meta">Manual visual QA surface for the package styles and behaviors.</div>
+          <div id="controls"></div>
+        </div>
+      </div>
+    </div>
+    <script type="module" src="./main.ts"></script>
+  </body>
+</html>
