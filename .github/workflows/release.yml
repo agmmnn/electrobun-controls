@@ -29,6 +29,11 @@ jobs:
           node-version: 24
           cache: npm
 
+      - name: Set up Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
       - name: Install dependencies
         run: npm ci
 
@@ -57,6 +62,11 @@ jobs:
           cache: npm
           registry-url: https://registry.npmjs.org
 
+      - name: Set up Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
       - name: Install dependencies
         run: npm ci
 
@@ -68,5 +78,3 @@ jobs:
 
       - name: Publish package
         run: npm publish --access public --provenance
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
