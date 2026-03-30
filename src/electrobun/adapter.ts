@@ -1,11 +1,45 @@
+import { Electroview } from "electrobun/view"
+
 import type {
   WindowControlsAdapter,
   WindowControlsListener,
   WindowControlsSnapshot,
 } from "../core/types"
+import type {
+  ElectrobunWindowControlsRPC,
+  ElectrobunWindowControlsRpcSchema,
+} from "./rpc"
 
 export interface CreateElectrobunAdapterOptions {
   snapshot?: Partial<WindowControlsSnapshot>
+  rpc?: ElectrobunWindowControlsRPC
+}
+
+let defaultElectroview: InstanceType<typeof Electroview> | undefined
+let defaultRPC: ElectrobunWindowControlsRPC | undefined
+
+function getDefaultElectrobunRPC() {
+  if (
+    typeof window === "undefined" ||
+    typeof window.__electrobunWebviewId !== "number"
+  ) {
+    return undefined
+  }
+
+  if (!defaultRPC) {
+    defaultRPC = Electroview.defineRPC<ElectrobunWindowControlsRpcSchema>({
+      handlers: {
+        requests: {},
+        messages: {},
+      },
+    }) as ElectrobunWindowControlsRPC
+  }
+
+  if (!defaultElectroview) {
+    defaultElectroview = new Electroview({ rpc: defaultRPC })
+  }
+
+  return defaultRPC
 }
 
 export function createElectrobunAdapter(
@@ -75,23 +109,44 @@ export function createElectrobunAdapter(
     winId: window.__electrobunWindowId,
     ...extra,
   })
+  const getRPC = () => options.rpc ?? getDefaultElectrobunRPC()
 
-  return {
+  const adapter: WindowControlsAdapter = {
     close() {
+      const rpc = getRPC()
+      if (rpc) {
+        return rpc.proxy.request.closeWindow()
+      }
       return sendInternalRequest("closeWindow", getWindowParams())
     },
     minimize() {
+      const rpc = getRPC()
+      if (rpc) {
+        return rpc.proxy.request.minimizeWindow()
+      }
       return sendInternalRequest("minimizeWindow", getWindowParams())
     },
     async toggleMaximize() {
       const nextMaximized = !snapshot.maximized
-      await sendInternalRequest(
-        nextMaximized ? "maximizeWindow" : "unmaximizeWindow",
-        getWindowParams()
-      )
+      const rpc = getRPC()
+      if (rpc) {
+        await rpc.proxy.request.toggleMaximizeWindow()
+      } else {
+        await sendInternalRequest(
+          nextMaximized ? "maximizeWindow" : "unmaximizeWindow",
+          getWindowParams()
+        )
+      }
       setSnapshot({ maximized: nextMaximized })
     },
-    getSnapshot() {
+    async getSnapshot() {
+      const rpc = getRPC()
+      if (rpc?.proxy.request.getWindowState) {
+        snapshot = {
+          ...snapshot,
+          ...(await rpc.proxy.request.getWindowState()),
+        }
+      }
       return { ...snapshot }
     },
     subscribe(listener) {
@@ -107,4 +162,13 @@ export function createElectrobunAdapter(
       }
     },
   }
+
+  if (options.rpc ?? getDefaultElectrobunRPC()) {
+    adapter.toggleFullscreen = async () => {
+      const rpc = getRPC()
+      await rpc?.proxy.request.toggleFullscreenWindow()
+    }
+  }
+
+  return adapter
 }

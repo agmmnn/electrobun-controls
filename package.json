@@ -29,8 +29,14 @@
       "import": "./dist/electrobun.js",
       "default": "./dist/electrobun.js"
     },
+    "./bun": {
+      "types": "./dist/bun.d.ts",
+      "import": "./dist/bun.js",
+      "default": "./dist/bun.js"
+    },
     "./style.css": {
       "types": "./dist/style.css.d.ts",
+      "import": "./dist/style.css",
       "default": "./dist/style.css"
     }
   },
@@ -47,6 +53,9 @@
     "titlebar",
     "bun"
   ],
+  "peerDependencies": {
+    "electrobun": ">=1.16.0"
+  },
   "scripts": {
     "build": "tsdown && node scripts/postbuild.mjs && publint . && attw --pack . --profile esm-only",
     "dev": "vite",
@@ -57,6 +66,7 @@
   "devDependencies": {
     "@arethetypeswrong/cli": "^0.18.2",
     "@types/node": "^24.0.0",
+    "electrobun": "^1.16.0",
     "jsdom": "^26.0.0",
     "publint": "^0.3.12",
     "tsdown": "^0.13.1",

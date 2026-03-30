@@ -41,3 +41,4 @@ await writeFile(
 await copyStableEntry("index")
 await copyStableEntry("dom")
 await copyStableEntry("electrobun")
+await copyStableEntry("bun")
