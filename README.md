@@ -1,4 +1,8 @@
+<div align="center">
+  <img width="200" height="200" alt="electrobun-controls" src="https://github.com/user-attachments/assets/214d2db4-3d43-4b1e-9ddd-142892389c2c" />
+
 # electrobun-controls
+</div>
 
 Framework-agnostic native-looking window controls for Electrobun.
 
