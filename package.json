@@ -1,6 +1,6 @@
 {
   "name": "electrobun-controls",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Framework-agnostic native-looking window controls for Electrobun.",
   "type": "module",
   "license": "MIT",
