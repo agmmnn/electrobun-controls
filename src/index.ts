@@ -3,13 +3,13 @@ export {
   type ControlsController,
   type ControlsControllerListener,
   type CreateControlsControllerOptions,
-} from "./core/controller"
+} from "./core/controller";
 export {
   detectRuntimeOS,
   resolveControlVariant,
   type DetectRuntimeOSInput,
   type ResolveControlVariantInput,
-} from "./core/os"
+} from "./core/os";
 export type {
   ControlVariant,
   RuntimeOS,
@@ -17,4 +17,4 @@ export type {
   WindowControlsAdapter,
   WindowControlsSnapshot,
   WindowControlsState,
-} from "./core/types"
+} from "./core/types";

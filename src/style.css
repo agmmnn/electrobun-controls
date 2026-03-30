@@ -1,7 +1,8 @@
 .eb-controls,
 .eb-titlebar {
-  --eb-font: "SF Pro Text", "Segoe UI Variable Display", "Segoe UI", Ubuntu,
-    Cantarell, sans-serif;
+  --eb-font:
+    "SF Pro Text", "Segoe UI Variable Display", "Segoe UI", Ubuntu, Cantarell,
+    sans-serif;
   --eb-focus-ring: rgba(44, 123, 229, 0.34);
   font-family: var(--eb-font);
 }
@@ -182,7 +183,9 @@
   color: rgba(0, 0, 0, 0.72);
   opacity: 0;
   transform: scale(0.92);
-  transition: opacity 120ms ease, transform 120ms ease;
+  transition:
+    opacity 120ms ease,
+    transform 120ms ease;
 }
 
 .eb-controls[data-variant="macos"]:hover .eb-controls__icon {
@@ -218,7 +221,8 @@
 }
 
 @media (prefers-color-scheme: dark) {
-  .eb-controls[data-theme="system"][data-variant="ubuntu"] .eb-controls__button {
+  .eb-controls[data-theme="system"][data-variant="ubuntu"]
+    .eb-controls__button {
     background: #3a3a3a;
   }
 }
@@ -227,7 +231,8 @@
   background: #cfcfcf;
 }
 
-.eb-controls[data-theme="dark"][data-variant="ubuntu"] .eb-controls__button:hover {
+.eb-controls[data-theme="dark"][data-variant="ubuntu"]
+  .eb-controls__button:hover {
   background: #474747;
 }
 
@@ -242,7 +247,8 @@
   background: #bababa;
 }
 
-.eb-controls[data-theme="dark"][data-variant="ubuntu"] .eb-controls__button:active {
+.eb-controls[data-theme="dark"][data-variant="ubuntu"]
+  .eb-controls__button:active {
   background: #555555;
 }
 

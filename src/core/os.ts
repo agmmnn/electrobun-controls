@@ -1,25 +1,29 @@
-import type { ControlVariant, RuntimeOS } from "./types"
+import type { ControlVariant, RuntimeOS } from "./types";
 
 export interface DetectRuntimeOSInput {
-  os?: RuntimeOS
+  os?: RuntimeOS;
 }
 
 export interface ResolveControlVariantInput {
-  os?: RuntimeOS
-  variant?: ControlVariant
+  os?: RuntimeOS;
+  variant?: ControlVariant;
 }
 
-function mapProcessPlatform(platform: string | undefined): RuntimeOS | undefined {
-  if (platform === "darwin") return "macos"
-  if (platform === "win32") return "windows"
-  if (platform === "linux") return "linux"
-  return undefined
+function mapProcessPlatform(
+  platform: string | undefined,
+): RuntimeOS | undefined {
+  if (platform === "darwin") return "macos";
+  if (platform === "win32") return "windows";
+  if (platform === "linux") return "linux";
+  return undefined;
 }
 
-function mapNavigatorPlatform(value: string | undefined): RuntimeOS | undefined {
-  if (!value) return undefined
+function mapNavigatorPlatform(
+  value: string | undefined,
+): RuntimeOS | undefined {
+  if (!value) return undefined;
 
-  const lower = value.toLowerCase()
+  const lower = value.toLowerCase();
 
   if (
     lower.includes("mac") ||
@@ -27,43 +31,43 @@ function mapNavigatorPlatform(value: string | undefined): RuntimeOS | undefined 
     lower.includes("iphone") ||
     lower.includes("ipad")
   ) {
-    return "macos"
+    return "macos";
   }
 
-  if (lower.includes("win")) return "windows"
-  if (lower.includes("linux") || lower.includes("x11")) return "linux"
+  if (lower.includes("win")) return "windows";
+  if (lower.includes("linux") || lower.includes("x11")) return "linux";
 
-  return undefined
+  return undefined;
 }
 
 export function detectRuntimeOS(input: DetectRuntimeOSInput = {}): RuntimeOS {
-  if (input.os) return input.os
+  if (input.os) return input.os;
 
   const processOS = mapProcessPlatform(
-    typeof process !== "undefined" ? process.platform : undefined
-  )
-  if (processOS) return processOS
+    typeof process !== "undefined" ? process.platform : undefined,
+  );
+  if (processOS) return processOS;
 
   if (typeof navigator !== "undefined") {
     const candidate =
       mapNavigatorPlatform(navigator.userAgentData?.platform) ??
       mapNavigatorPlatform(navigator.platform) ??
-      mapNavigatorPlatform(navigator.userAgent)
+      mapNavigatorPlatform(navigator.userAgent);
 
-    if (candidate) return candidate
+    if (candidate) return candidate;
   }
 
-  return "unknown"
+  return "unknown";
 }
 
 export function resolveControlVariant(
-  input: ResolveControlVariantInput = {}
+  input: ResolveControlVariantInput = {},
 ): ControlVariant {
-  if (input.variant) return input.variant
+  if (input.variant) return input.variant;
 
-  const os = detectRuntimeOS({ os: input.os })
+  const os = detectRuntimeOS({ os: input.os });
 
-  if (os === "macos") return "macos"
-  if (os === "linux") return "ubuntu"
-  return "windows"
+  if (os === "macos") return "macos";
+  if (os === "linux") return "ubuntu";
+  return "windows";
 }

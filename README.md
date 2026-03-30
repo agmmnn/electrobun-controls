@@ -1,30 +1,38 @@
 <div align="center">
-  <img width="200" height="200" alt="electrobun-controls" src="https://github.com/user-attachments/assets/214d2db4-3d43-4b1e-9ddd-142892389c2c" />
-</div>
+<img width="200" alt="electrobun-controls" src="https://github.com/user-attachments/assets/cb37ac12-543e-44b1-afda-7313256d9757" />
 
 # electrobun-controls
 
-Framework-agnostic native-looking window controls for Electrobun.
+</div>
 
-`electrobun-controls` ships one ESM package with:
+Framework-agnostic, native-looking window controls for Electrobun.
 
-- headless runtime and OS detection
-- an Electrobun adapter that auto-bootstraps a view-side RPC
-- a small Bun helper for wiring native window actions
-- a prebuilt DOM renderer for vanilla JS and framework refs
-- a small titlebar helper that applies Electrobun drag-region classes
+> One package. No boilerplate. Works with any frontend.
 
-## Install
+## ✨ Features
+
+- native-style window controls (macOS, Windows, Linux)
+- framework-agnostic DOM API (React, Vue, Svelte, Solid, vanilla)
+- built-in Electrobun adapter (auto RPC wiring)
+- Bun helper for native window actions
+- prebuilt renderer + styles
+- titlebar utilities with correct drag regions
+
+## 📦 Install
 
 ```bash
 npm install electrobun-controls
 ```
 
-If you use the Electrobun adapter, install `electrobun` in the host app as well.
+If using Electrobun, install it in your host app as well:
 
-## Electrobun setup
+```bash
+npm install electrobun
+```
 
-Use a custom title bar in Electrobun:
+## ⚡ Quick start
+
+### 1. Electrobun (main process)
 
 ```ts
 import { BrowserWindow } from "electrobun/bun";
@@ -40,14 +48,7 @@ mainWindow = new BrowserWindow({
 });
 ```
 
-The package uses the documented drag-region classes:
-
-- `electrobun-webkit-app-region-drag`
-- `electrobun-webkit-app-region-no-drag`
-
-## Usage
-
-### Vanilla / imperative DOM
+### 2. Renderer
 
 ```ts
 import "electrobun-controls/style.css";
@@ -62,14 +63,9 @@ const titlebar = createTitlebar({
 document.body.prepend(titlebar.element);
 ```
 
-That is the intended simple setup:
+## 🧩 Framework usage
 
-- Bun/main: `titleBarStyle: "hidden"` plus `createElectrobunWindowControlsRPC(() => mainWindow)`
-- Renderer: `createElectrobunAdapter()` with no extra RPC boilerplate
-
-### Frameworks
-
-The DOM API is framework-agnostic. Mount it into a ref or host element from React, Vue, Svelte, Solid, or plain JS:
+Mount into any framework via a ref or host element:
 
 ```ts
 import "electrobun-controls/style.css";
@@ -80,11 +76,18 @@ const mounted = mountWindowControls(hostElement, {
   adapter: createElectrobunAdapter(),
 });
 
-// later
+// cleanup
 mounted.destroy();
 ```
 
-## Package exports
+## How it works
+
+- main process exposes window actions via RPC
+- renderer adapter connects automatically (no boilerplate)
+- DOM renderer handles UI + interaction
+- drag regions are applied via Electrobun classes
+
+## Exports
 
 - `electrobun-controls`
 - `electrobun-controls/dom`
@@ -94,16 +97,20 @@ mounted.destroy();
 
 ## Notes
 
-- Runtime OS detection uses explicit override first, then `process.platform`, then browser `navigator` signals.
-- Linux maps to the Ubuntu/Yaru-inspired control variant in v1.
-- The default Electrobun adapter auto-creates a view-side `Electroview` RPC when it detects an Electrobun webview.
-- The Bun helper uses native `close`, `minimize`, `maximize`, and `setFullScreen` window methods.
+- OS detection: override → `process.platform` → `navigator`
+- Linux uses Ubuntu/Yaru-style controls (v1)
+- Electrobun adapter auto-detects webview and sets up RPC
+- Bun helper maps to native window APIs (`close`, `minimize`, `maximize`, `setFullScreen`)
 
 ## Development
 
 ```bash
 npm install
-npm run test
-npm run build
 npm run dev
+npm run build
+npm run test
 ```
+
+## License
+
+MIT

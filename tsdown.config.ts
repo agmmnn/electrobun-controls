@@ -1,4 +1,4 @@
-import { defineConfig } from "tsdown"
+import { defineConfig } from "tsdown";
 
 export default defineConfig({
   entry: {
@@ -7,11 +7,13 @@ export default defineConfig({
     electrobun: "src/electrobun.ts",
     bun: "src/bun.ts",
   },
+  deps: {
+    neverBundle: ["electrobun/view", "electrobun/bun"],
+  },
   format: ["esm"],
   dts: true,
   sourcemap: true,
   clean: true,
   treeshake: true,
   platform: "browser",
-  external: ["electrobun/view", "electrobun/bun"],
-})
+});

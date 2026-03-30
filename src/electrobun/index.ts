@@ -1,8 +1,8 @@
 export {
   createElectrobunAdapter,
   type CreateElectrobunAdapterOptions,
-} from "./adapter"
+} from "./adapter";
 export type {
   ElectrobunWindowControlsRPC,
   ElectrobunWindowControlsRpcSchema,
-} from "./rpc"
+} from "./rpc";
