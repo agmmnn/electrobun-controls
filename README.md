@@ -3,6 +3,11 @@
 
 # electrobun-controls
 
+[![npm](https://img.shields.io/npm/v/electrobun-controls?style=flat&color=1F2430)](https://npmjs.com/package/electrobun-controls)
+[![release](https://img.shields.io/github/v/release/agmmnn/electrobun-controls?style=flat&color=1F2430)](https://github.com/agmmnn/electrobun-controls/releases/latest)
+[![bun](https://img.shields.io/badge/bun-1F2430?style=flat&logo=bun&logoColor=white&color=1F2430)](https://bun.sh)
+[![electrobun](https://img.shields.io/badge/electrobun-22c55e?style=flat&color=1F2430)](https://github.com/blackboardsh/electrobun)
+
 </div>
 
 Framework-agnostic, native-looking window controls for Electrobun.
